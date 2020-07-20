@@ -10,9 +10,9 @@ public class Student {
 	private String lastName;
 	private int gradeYear;
 	private List<Course> coursesJoined;
-	private double tutionBalance=0d;
+	private double tutionBalance = 0d;
 	private double lastTutionPayment;
-	private static int id=1000;
+	private static int id = 1000;
 
 	public Student() {
 		super();
@@ -29,13 +29,14 @@ public class Student {
 		generateUid();
 		assignCourseToStudent(courese);
 		tutionPayment();
+		showInfo();
 
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	private void generateUid() {
 		this.id++;
-		setUid(this.id); 
+		setUid(this.id);
 	}
 
 	private void assignCourseToStudent(String course) {
@@ -87,10 +88,10 @@ public class Student {
 				System.out.println("You have not enrolled any course");
 
 			}
-			
-			//=this.getTutionBalance()+courseObj.getFee();
-			
-			setTutionBalance(this.getTutionBalance()+courseObj.getFee());
+
+			// =this.getTutionBalance()+courseObj.getFee();
+
+			setTutionBalance(this.getTutionBalance() + courseObj.getFee());
 
 			coursesJoined.add(courseObj);
 
@@ -99,16 +100,29 @@ public class Student {
 	}
 
 	public void tutionPayment() {
-		
+
 		System.out.println("how much fee would you like to do.");
 		Scanner sc = new Scanner(System.in);
-		 double  pay=sc.nextDouble();
-		 setTutionBalance(getTutionBalance()-pay);
-		 setLastTutionPayment(pay);
-		 System.out.println("Thank you for you payment of Rs : " +this.getLastTutionPayment());
-		 System.out.println("Now your balance is R :"+ this.getTutionBalance());
-		
+		double pay = sc.nextDouble();
+		setTutionBalance(getTutionBalance() - pay);
+		setLastTutionPayment(pay);
+		System.out.println("Thank you for you payment of Rs : " + this.getLastTutionPayment());
+		System.out.println("Now your balance is R :" + this.getTutionBalance());
+
 	}
+	
+	public void showInfo() {
+		
+		System.out.println("Name:-"+ getFirstName()+" "+ getLastName());
+		System.out.println("Courses you have chosen there are following.");
+		for(Course c  : coursesJoined) {
+		System.out.println(c.getName() + "at Rs" + c.getFee());
+		}
+		
+		System.out.println("Tustion Balance"+ this.getTutionBalance());
+		System.out.println("Last payment has been done by you of Rs"+ this.getLastTutionPayment() );
+	}
+
 	public int getUid() {
 		return uid;
 	}
