@@ -88,8 +88,6 @@ public class Student {
 				}
 				
 				coursesJoined.add(courseObj);
-				
-				
 				 
 			 }
 			 
