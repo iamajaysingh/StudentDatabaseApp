@@ -14,6 +14,7 @@ public class Student {
 	
 	
 	
+	
 
 	public Student() {
 		super();
@@ -28,6 +29,10 @@ public class Student {
 		 String courese =  s.nextLine();
 		   
 		 assignCourseToStudent(courese);
+		 
+		    generateUid();
+			tutionPayment();
+			showInfo();
 		
 		// TODO Auto-generated constructor stub
 	}
@@ -87,7 +92,9 @@ public class Student {
 				
 				}
 				
-				coursesJoined.add(courseObj);
+				 setTutionBalance(this.getTutionBalance() + courseObj.getFee());
+			       	coursesJoined.add(courseObj);
+					System.out.println("Now your balance is Rs :" + this.getTutionBalance());
 				
 				
 				 
@@ -95,6 +102,30 @@ public class Student {
 			 
 	   
 		
+	}
+	
+	public void tutionPayment() {
+
+		System.out.println("How much fee would you like to pay.");
+		Scanner sc = new Scanner(System.in);
+		double pay = sc.nextDouble();
+		setTutionBalance(getTutionBalance() - pay);
+		setLastTutionPayment(pay);
+		System.out.println("Thank you for payment of Rs : " + this.getLastTutionPayment());
+		System.out.println("Now your balance is R : " + this.getTutionBalance());
+
+	}
+
+	public void showInfo() {
+
+		System.out.println("Name:-" + getFirstName() + " " + getLastName());
+		System.out.println("There are following courses, you have chosen.");
+		for (Course c : coursesJoined) {
+			System.out.println(c.getName() + "at Rs : " + c.getFee());
+		}
+
+		System.out.println("Tustion Balance : " + this.getTutionBalance());
+		System.out.println("Last payment has been done by you of Rs : " + this.getLastTutionPayment());
 	}
 	
 	
