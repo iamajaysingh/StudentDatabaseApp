@@ -14,8 +14,9 @@ public class Run {
 	         
 	         for(int i =0 ; i < stuArray.length;  i++) {
 	        	 stuArray[i]     =  new Student();
+	        	 System.out.println("Please enter info of next student.");
 	         }
-	         System.out.println("Please enter info of next student.");
+	         
 	         
 
 	}

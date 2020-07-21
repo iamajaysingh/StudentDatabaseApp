@@ -10,7 +10,10 @@ public class Student {
 	private String lastName;
 	private int gradeYear;
 	private List<Course> coursesJoined;
-	private String tutionBalance;
+	private double tutionBalance = 0d;
+	private double lastTutionPayment;
+	private static int id = 1000;
+	private static int courseId = 0;
 	
 	
 	
@@ -25,7 +28,7 @@ public class Student {
 		         setLastName(s.nextLine());
 		System.out.println("Please enter the grade Year");
 		         setGradeYear(Integer.parseInt(s.nextLine()));
-		System.out.println("please chose course\n 1) History\n 2) Mathematics\n3) English\n4) Chemistry\n5) Computer sciense and please type couser id with followed by #");
+		System.out.println("please chose course\n 1) History \n 2) Mathematics\n3) English\n4) Chemistry\n5) Computer sciense and please type couser id with followed by #");
 		 String courese =  s.nextLine();
 		   
 		 assignCourseToStudent(courese);
@@ -35,6 +38,10 @@ public class Student {
 			showInfo();
 		
 		// TODO Auto-generated constructor stub
+	}
+	private void generateUid() {
+		this.id++;
+		setUid(this.id);
 	}
 	
 	private void assignCourseToStudent(String course) {
@@ -57,24 +64,28 @@ public class Student {
 				    courseObj.setId(1);
 					courseObj.setName("History");
 					courseObj.setFee(500);
+					setTutionBalance(this.getTutionBalance() + courseObj.getFee());
 					break;
 				case 2:
 					//Course courseObj2 =	new Course();
 					courseObj.setId(2);
 					courseObj.setName("Mathematics");
 					courseObj.setFee(600);
+					setTutionBalance(this.getTutionBalance() + courseObj.getFee());
 			     break;	
 				case 3:
 					//Course courseObj3 =	new Course();
 					courseObj.setId(3);
 					courseObj.setName("English");
 					courseObj.setFee(800);
+					setTutionBalance(this.getTutionBalance() + courseObj.getFee());
 					break;
 				case 4:
 					//Course courseObj4 =	new Course();
 					courseObj.setId(4);
 					courseObj.setName("Chemistry");
 					courseObj.setFee(800);
+					setTutionBalance(this.getTutionBalance() + courseObj.getFee());
 					
 					break;
 				case 5:
@@ -82,6 +93,7 @@ public class Student {
 					courseObj.setId(5);
 					courseObj.setName("Computer sciense");
 					courseObj.setFee(900);
+					setTutionBalance(this.getTutionBalance() + courseObj.getFee());
 					break;
 					default :
 						//Course courseObj6 =	new Course();
@@ -92,13 +104,11 @@ public class Student {
 				
 				}
 				
-				 setTutionBalance(this.getTutionBalance() + courseObj.getFee());
 			       	coursesJoined.add(courseObj);
-					System.out.println("Now your balance is Rs :" + this.getTutionBalance());
-				
-				
+					
 				 
 			 }
+		 System.out.println("Now your balance is Rs :" + this.getTutionBalance());
 			 
 	   
 		
@@ -121,7 +131,7 @@ public class Student {
 		System.out.println("Name:-" + getFirstName() + " " + getLastName());
 		System.out.println("There are following courses, you have chosen.");
 		for (Course c : coursesJoined) {
-			System.out.println(c.getName() + "at Rs : " + c.getFee());
+			System.out.println(c.getName() + " at Rs : " + c.getFee());
 		}
 
 		System.out.println("Tustion Balance : " + this.getTutionBalance());
@@ -153,12 +163,20 @@ public class Student {
 	public void setGradeYear(int gradeYear) {
 		this.gradeYear = gradeYear;
 	}
-	
-	public String getTutionBalance() {
+	public double getTutionBalance() {
 		return tutionBalance;
 	}
-	public void setTutionBalance(String tutionBalance) {
+
+	public void setTutionBalance(double tutionBalance) {
 		this.tutionBalance = tutionBalance;
+	}
+
+	public double getLastTutionPayment() {
+		return lastTutionPayment;
+	}
+
+	public void setLastTutionPayment(double lastTutionPayment) {
+		this.lastTutionPayment = lastTutionPayment;
 	}
 
 	public List<Course> getCoursesJoined() {
@@ -168,12 +186,16 @@ public class Student {
 	public void setCoursesJoined(List<Course> coursesJoined) {
 		this.coursesJoined = coursesJoined;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Student [uid=" + uid + ", firstName=" + firstName + ", lastName=" + lastName + ", gradeYear="
-				+ gradeYear + ", coursesJoined=" + coursesJoined + ", tutionBalance=" + tutionBalance + "]";
+				+ gradeYear + ", coursesJoined=" + coursesJoined + ", tutionBalance=" + tutionBalance
+				+ ", lastTutionPayment=" + lastTutionPayment + "]";
 	}
+
+	
+	
 	
 
 
