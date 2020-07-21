@@ -6,7 +6,7 @@ public class Run {
 		// TODO Auto-generated method stub
 		
 		Student s = new Student();
-		 System.out.println("Student details" + s);
+		// System.out.println("Student details" + s);
 		 
 
 	}

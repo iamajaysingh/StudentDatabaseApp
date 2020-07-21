@@ -9,10 +9,11 @@ public class Student {
 	private String firstName;
 	private String lastName;
 	private int gradeYear;
-	private List<Course> coursesJoined;
+	private List<Course> coursesJoined = new ArrayList<Course>();
 	private double tutionBalance = 0d;
 	private double lastTutionPayment;
 	private static int id = 1000;
+	private static int courseId = 0;
 
 	public Student() {
 		super();
@@ -23,11 +24,19 @@ public class Student {
 		setLastName(s.nextLine());
 		System.out.println("Please enter the grade Year");
 		setGradeYear(Integer.parseInt(s.nextLine()));
-		System.out.println(
-				"please chose course\n 1) History\n 2) Mathematics\n3) English\n4) Chemistry\n5) Computer sciense and please type couser id with followed by #");
-		String courese = s.nextLine();
+
+		
+		do {
+			System.out.println("please enroll for course and type Q for Quiet ");
+			String couresName = s.nextLine();
+			if (!(couresName.equals("Q"))) {
+				assignCourseToStudent(couresName);
+			} else
+				break;
+
+		} while (1 == 1);
 		generateUid();
-		assignCourseToStudent(courese);
+
 		tutionPayment();
 		showInfo();
 
@@ -39,88 +48,41 @@ public class Student {
 		setUid(this.id);
 	}
 
-	private void assignCourseToStudent(String course) {
-
-		coursesJoined = new ArrayList<Course>();
-
-		String[] courseArr = course.split("#");
-
-		for (int i = 0; i < courseArr.length; i++) {
-
-			// Course c = new Course();
-
-			int couseId = Integer.parseInt(courseArr[i]);
-			Course courseObj = new Course();
-			switch (couseId) {
-
-			case 1:
-				// Course courseObj = new Course();
-				courseObj.setId(1);
-				courseObj.setName("History");
-				courseObj.setFee(500);
-				break;
-			case 2:
-				// Course courseObj2 = new Course();
-				courseObj.setId(2);
-				courseObj.setName("Mathematics");
-				courseObj.setFee(600);
-				break;
-			case 3:
-				// Course courseObj3 = new Course();
-				courseObj.setId(3);
-				courseObj.setName("English");
-				courseObj.setFee(800);
-				break;
-			case 4:
-				// Course courseObj4 = new Course();
-				courseObj.setId(4);
-				courseObj.setName("Chemistry");
-				courseObj.setFee(800);
-
-				break;
-			case 5:
-				// Course courseObj5 = new Course();ajay
-				courseObj.setId(5);
-				courseObj.setName("Computer sciense");
-				courseObj.setFee(900);
-				break;
-			default:
-				System.out.println("You have not enrolled any course");
-
-			}
-
-			// =this.getTutionBalance()+courseObj.getFee();
-
-			setTutionBalance(this.getTutionBalance() + courseObj.getFee());
-
-			coursesJoined.add(courseObj);
-
-		}
+	private void assignCourseToStudent(String courseName) {
+		this.courseId++;
+		Course courseObj = new Course();
+		courseObj.setId(this.courseId);
+		courseObj.setName(courseName);
+		// fees of each course is same
+		courseObj.setFee(500);
+        setTutionBalance(this.getTutionBalance() + courseObj.getFee());
+       	coursesJoined.add(courseObj);
+		System.out.println("Now your balance is Rs :" + this.getTutionBalance());
 
 	}
 
 	public void tutionPayment() {
 
-		System.out.println("how much fee would you like to do.");
+		System.out.println("How much fee would you like to pay.");
 		Scanner sc = new Scanner(System.in);
 		double pay = sc.nextDouble();
 		setTutionBalance(getTutionBalance() - pay);
 		setLastTutionPayment(pay);
-		System.out.println("Thank you for you payment of Rs : " + this.getLastTutionPayment());
-		System.out.println("Now your balance is R :" + this.getTutionBalance());
+		System.out.println("Thank you for payment of Rs : " + this.getLastTutionPayment());
+		System.out.println("Now your balance is R : " + this.getTutionBalance());
 
 	}
-	
+
 	public void showInfo() {
-		
-		System.out.println("Name:-"+ getFirstName()+" "+ getLastName());
-		System.out.println("Courses you have chosen there are following.");
-		for(Course c  : coursesJoined) {
-		System.out.println(c.getName() + "at Rs" + c.getFee());
+
+		System.out.println("Name:-" + getFirstName() + " " + getLastName());
+		System.out.println("There are following courses, you have chosen.");
+		for (Course c : coursesJoined) {
+			System.out.println(c.getName() + "at Rs : " + c.getFee());
 		}
-		
-		System.out.println("Tustion Balance"+ this.getTutionBalance());
-		System.out.println("Last payment has been done by you of Rs"+ this.getLastTutionPayment() );
+
+		System.out.println("Tustion Balance : " + this.getTutionBalance());
+		System.out.println("Last payment has been done by you of Rs : " + this.getLastTutionPayment());
 	}
 
 	public int getUid() {
